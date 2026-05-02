@@ -27,12 +27,12 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Build dự án với Maven
-        run: mvn -B package --file pom.xml
-
+      - name: Build và kiểm tra dự án (Verify)
+        run: mvn -B verify --file pom.xml
       # 3. Đổi tên file Artifact
       - name: Lưu trữ file JAR
         uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: BankSystem-Artifact-${{ matrix.os }}
           path: target/*.jar
